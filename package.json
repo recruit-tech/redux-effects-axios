@@ -1,0 +1,26 @@
+{
+  "name": "redux-effects-axios",
+  "type": "module",
+  "version": "0.0.5",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build"
+  },
+  "author": "toshi1127 <toshi.matsumoto.3n@gmail.com> (https://github.com/toshi1127)",
+  "license": "MIT",
+  "devDependencies": {
+    "axios": "^0.21.1",
+    "redux": "^4.1.0",
+    "typescript": "^4.3.2"
+  },
+  "peerDependencies": {
+    "axios": "^0.21.1",
+    "redux": "^4.1.0"
+  },
+  "dependencies": {
+    "typescript-fsa": "^3.0.0"
+  }
+}
