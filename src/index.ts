@@ -41,11 +41,13 @@ const req = async <T = any, D = any>(
   return { result: response.data }
 }
 
-export const read = (path: string) => (): AxiosFetchAction =>
+export const read = (path: string, params = {}, cancelToken?: CancelToken) => (): AxiosFetchAction =>
   axiosAction({
     type: 'read',
     path,
+    params,
     method: typeToMethod('read'),
+    cancelToken,
   })
 
 export const del = (path: string) => (): AxiosFetchAction =>
@@ -100,7 +102,7 @@ export const reduxEffectsAxios: Middleware = () => (
   const { method, path, body, params, cancelToken } = action.payload
 
   if (method === 'get' || method === 'delete') {
-    return await req(method, path, {}, cancelToken)
+    return await req(method, path, params, cancelToken)
   } else {
     return await req(method, path, params || body, cancelToken)
   }
