@@ -1,7 +1,7 @@
 {
   "name": "@recruit-tech/redux-effects-axios",
   "type": "module",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
