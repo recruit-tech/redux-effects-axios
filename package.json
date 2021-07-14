@@ -12,14 +12,15 @@
   "author": "toshi1127 <toshi.matsumoto.3n@gmail.com> (https://github.com/toshi1127)",
   "license": "MIT",
   "devDependencies": {
+    "axios": "^0.21.1",
     "redux": "^4.1.0",
     "typescript": "^4.3.2"
   },
   "peerDependencies": {
-    "redux": "^4.1.0"
+    "redux": "^4.1.0",
+    "axios": "^0.21.1"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "typescript-fsa": "^3.0.0"
   }
 }

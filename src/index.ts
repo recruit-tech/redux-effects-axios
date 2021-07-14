@@ -1,4 +1,4 @@
-import axios, { CancelToken, AxiosRequestConfig } from "axios";
+import { CancelToken, AxiosInstance } from "axios";
 import { AnyAction, Dispatch, Middleware } from "redux";
 import { actionCreatorFactory } from "typescript-fsa";
 
@@ -26,7 +26,7 @@ export type AxiosFetchAction = ReturnType<typeof axiosAction>;
 
 const typeToMethod = (type: RequestType) => methodMap[type] as MethodType;
 
-const req = async <T = any, D = any, P = any>(
+const reqFactory = (axiosInstance: AxiosInstance) => async <T = any, D = any, P = any>(
   requestConfig:
     | {
         method: "patch" | "put" | "post";
@@ -42,7 +42,7 @@ const req = async <T = any, D = any, P = any>(
         cancelToken?: CancelToken;
       }
 ) => {
-  const response = await axios.request<{ results: T }>(requestConfig);
+  const response = await axiosInstance.request<{ results: T }>(requestConfig);
   return { result: response.data };
 };
 
@@ -102,14 +102,10 @@ export const update = <B = any>(
     method: typeToMethod("update")
   });
 
-type DefaultsConfig = Pick<AxiosRequestConfig, "headers">;
 export const reduxEffectsAxios = (
-  defaults: DefaultsConfig = { headers: {} }
+  axiosInstance: AxiosInstance
 ): Middleware => {
-  axios.defaults.headers = {
-    ...axios.defaults.headers,
-    ...defaults.headers
-  };
+  const request = reqFactory(axiosInstance)
   return () => (next: Dispatch<AnyAction>) => async (
     action: AnyAction | AxiosFetchAction
   ) => {
@@ -117,14 +113,14 @@ export const reduxEffectsAxios = (
     const { method, path, body, params, cancelToken } = action.payload;
 
     if (method === "get" || method === "delete") {
-      return req({
+      return request({
         method,
         url: path,
         params,
         cancelToken
       });
     } else {
-      return req({
+      return request({
         method,
         url: path,
         params,
