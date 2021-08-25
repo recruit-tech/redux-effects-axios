@@ -1,25 +1,31 @@
 {
-  "name": "redux-effects-axios",
-  "type": "module",
-  "version": "0.0.5",
+  "name": "@recruit-tech/redux-effects-axios",
+  "version": "0.0.9",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:common && npm run build:esmodule",
+    "build:common": "tsc --module CommonJS && mv ./dist/index.js dist/index.cjs.js",
+    "build:esmodule": "tsc --module ESNext && mv ./dist/index.js dist/index.es.js",
     "prepublish": "npm run build"
   },
   "author": "toshi1127 <toshi.matsumoto.3n@gmail.com> (https://github.com/toshi1127)",
   "license": "MIT",
   "devDependencies": {
+    "axios": "^0.21.1",
     "redux": "^4.1.0",
     "typescript": "^4.3.2"
   },
   "peerDependencies": {
-    "redux": "^4.1.0"
+    "redux": "^4.1.0",
+    "axios": "^0.21.1"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "typescript-fsa": "^3.0.0"
   }
 }
