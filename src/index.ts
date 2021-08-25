@@ -66,20 +66,6 @@ export const del = (path: string) => (): AxiosFetchAction =>
     method: typeToMethod("delete")
   });
 
-export const readByPost = <P = any>(
-  path: string,
-  params: P,
-  cancelToken?: CancelToken
-) => (): AxiosFetchAction => {
-  return axiosAction({
-    type: "read",
-    path,
-    params,
-    method: typeToMethod("create"),
-    cancelToken
-  });
-};
-
 export const create = <B = any>(
   path: string,
   body: B
