@@ -17,7 +17,7 @@
   "author": "toshi1127 <toshi.matsumoto.3n@gmail.com> (https://github.com/toshi1127)",
   "license": "MIT",
   "devDependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.0.0",
     "redux": "^4.1.0",
     "typescript": "^4.3.2"
   },
